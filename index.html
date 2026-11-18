@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Love ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Quicksand:wght@500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+      font-family: 'Quicksand', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Floating Cute Hearts Background (Lock Screen) */
+    .bg-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      transition: opacity 0.8s;
+    }
+
+    .heart-bg {
+      position: absolute;
+      bottom: -50px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 24px;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ================= PART 1: LOCK SCREEN ================= */
+    .lock-screen {
+      position: relative;
+      z-index: 10;
+      width: 340px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(15px);
+      border-radius: 35px;
+      padding: 25px 20px;
+      box-shadow: 0 20px 50px rgba(238, 100, 130, 0.35), inset 0 0 0 3px #fff;
+      text-align: center;
+      transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .lock-screen.unlocked {
+      transform: scale(1.2);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .lock-icon {
+      font-size: 38px;
+      margin-bottom: 8px;
+      display: inline-block;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    h2 {
+      font-family: 'Fredoka', sans-serif;
+      color: #ff4b72;
+      font-size: 19px;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    .password-display {
+      width: 100%;
+      height: 42px;
+      background: #fff0f3;
+      border: 2px solid #ffb3c1;
+      border-radius: 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #d6336c;
+      letter-spacing: 3px;
+      margin-bottom: 6px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    .password-display.shake {
+      animation: shake 0.4s ease-in-out;
+      border-color: #ff1e42;
+      background: #ffe0e6;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      50% { transform: translateX(8px); }
+      75% { transform: translateX(-8px); }
+    }
+
+    .hint {
+      font-size: 11.5px;
+      color: #9e5a6b;
+      margin-bottom: 15px;
+      height: 15px;
+    }
+
+    /* KEYBOARD WITH PHOTO1.JPG THEME BACKGROUND */
+    .keyboard {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px 8px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.45);
+      border: 2px solid #ffb3c1;
+      box-shadow: 0 8px 20px rgba(214, 51, 108, 0.15);
+    }
+
+    .keyboard::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('photo1.jpg') center/cover no-repeat;
+      opacity: 0.28;
+      z-index: 0;
+    }
+
+    .key-row {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .key {
+      background: rgba(255, 255, 255, 0.92);
+      border: none;
+      border-radius: 8px;
+      padding: 9px 0;
+      width: 27px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 14px;
+      color: #592e3b;
+      box-shadow: 0 2px 0 #f3c1cd;
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .key:active {
+      transform: translateY(2px);
+      box-shadow: 0 0 0 #f3c1cd;
+      background: #ffe5ec;
+    }
+
+    .key.action {
+      width: 50px;
+      background: rgba(255, 204, 213, 0.95);
+      color: #c9184a;
+      font-size: 12px;
+    }
+
+    .key.enter {
+      width: 62px;
+      background: #ff4b72;
+      color: #fff;
+      box-shadow: 0 2px 0 #c9184a;
+    }
+
+    /* ================= PART 2: LOVE TREE & TIMER ================= */
+    .love-scene {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #fff5f7 0%, #ffe3e8 50%, #ffd1dc 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease 0.3s;
+      z-index: 20;
+      padding: 20px;
+    }
+
+    .love-scene.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .card-container {
+      position: relative;
+      width: 100%;
+      max-width: 920px;
+      height: 540px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      box-shadow: 0 20px 60px rgba(214, 51, 108, 0.18), inset 0 0 0 2px #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 35px 40px 25px;
+      overflow: hidden;
+    }
+
+    .top-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      position: relative;
+      z-index: 5;
+    }
+
+    .message-box {
+      width: 48%;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1.2s ease 1.2s;
+    }
+
+    .love-scene.show .message-box {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .message-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 32px;
+      color: #d6336c;
+      margin-bottom: 14px;
+    }
+
+    .message-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #5c3a44;
+      font-weight: 600;
+    }
+
+    .message-text span {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* Cute Animated Couple Avatar & Signature Section */
+    .signature-area {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .couple-avatar {
+      position: relative;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      animation: floatAvatar 2.5s ease-in-out infinite;
+    }
+
+    .couple-avatar .heart-pulse {
+      position: absolute;
+      top: -8px;
+      left: 18px;
+      font-size: 16px;
+      animation: pulseHeart 1.2s infinite;
+    }
+
+    @keyframes floatAvatar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes pulseHeart {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.8; }
+    }
+
+    .signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 26px;
+      color: #ff4b72;
+      font-weight: 700;
+    }
+
+    .tree-area {
+      position: absolute;
+      right: 0;
+      bottom: 58px;
+      width: 55%;
+      height: 460px;
+      pointer-events: none;
+    }
+
+    canvas#treeCanvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Left Floating Photo (photo1.jpg) */
+    .floating-photo-left {
+      position: absolute;
+      left: 42%;
+      bottom: 90px;
+      width: 78px;
+      height: 98px;
+      background: #ffffff;
+      padding: 4px;
+      border-radius: 14px;
+      border: 2px solid #ffb3c1;
+      box-shadow: 0 10px 25px rgba(214, 51, 108, 0.25);
+      z-index: 8;
+      opacity: 0;
+      animation: floatPhotoAnim1 3.2s ease-in-out infinite;
+      transition: opacity 1.2s ease 1.5s;
+    }
+
+    /* Right Floating Photo (photo4.jpg - Replacing Red Box) */
+    .floating-photo-right {
+      position: absolute;
+      right: 35px;
+      bottom: 95px;
+      width: 78px;
+      height: 98px;
+      background: #ffffff;
+      padding: 4px;
+      border-radius: 14px;
+      border: 2px solid #ffb3c1;
+      box-shadow: 0 10px 25px rgba(214, 51, 108, 0.25);
+      z-index: 8;
+      opacity: 0;
+      animation: floatPhotoAnim2 3.5s ease-in-out infinite;
+      transition: opacity 1.2s ease 1.5s;
+    }
+
+    .love-scene.show .floating-photo-left,
+    .love-scene.show .floating-photo-right {
+      opacity: 1;
+    }
+
+    .floating-photo-left img,
+    .floating-photo-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    @keyframes floatPhotoAnim1 {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-9px) rotate(-2deg); }
+    }
+
+    @keyframes floatPhotoAnim2 {
+      0%, 100% { transform: translateY(0) rotate(5deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+
+    /* Bottom Section with Timer & Music Player Widget */
+    .bottom-timer-section {
+      position: relative;
+      z-index: 10;
+      border-top: 2.5px solid #593a42;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all 1s ease 1.8s;
+    }
+
+    .love-scene.show .bottom-timer-section {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timer-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .timer-label {
+      font-size: 14px;
+      color: #8c4a5c;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .timer-clock {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 21px;
+      color: #d6336c;
+      letter-spacing: 0.5px;
+    }
+
+    .timer-clock span {
+      font-size: 25px;
+      color: #ff1e56;
+    }
+
+    /* Cute Music Player Widget with Synchronized Lyrics Ticker */
+    .music-widget {
+      display: flex;
+      align-items: center;
+      background: #fff0f3;
+      border: 2px solid #ffb3c1;
+      padding: 8px 16px;
+      border-radius: 50px;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(214, 51, 108, 0.1);
+    }
+
+    .music-disc {
+      width: 35px;
+      height: 35px;
+      background: linear-gradient(135deg, #ff4b72, #ff758f);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 14px;
+      animation: spinDisc 3s linear infinite;
+    }
+
+    @keyframes spinDisc {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .music-info {
+      display: flex;
+      flex-direction: column;
+      max-width: 200px;
+    }
+
+    .song-name {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 13px;
+      color: #d6336c;
+      font-weight: 600;
+    }
+
+    /* Synced Lyrics Ticker */
+    .lyrics-ticker {
+      font-size: 10.5px;
+      color: #c9184a;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+      height: 15px;
+      transition: opacity 0.3s ease;
+    }
+
+    .sound-waves {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 14px;
+    }
+
+    .wave-bar {
+      width: 3px;
+      background: #ff4b72;
+      border-radius: 2px;
+      animation: danceWave 1s ease-in-out infinite alternate;
+    }
+
+    .wave-bar:nth-child(1) { height: 8px; animation-delay: 0.1s; }
+    .wave-bar:nth-child(2) { height: 14px; animation-delay: 0.3s; }
+    .wave-bar:nth-child(3) { height: 6px; animation-delay: 0.2s; }
+    .wave-bar:nth-child(4) { height: 12px; animation-delay: 0.4s; }
+
+    @keyframes danceWave {
+      0% { transform: scaleY(0.4); }
+      100% { transform: scaleY(1.2); }
+    }
+
+    .music-controls {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: #d6336c;
+      transition: transform 0.2s;
+    }
+
+    .music-controls:hover {
+      transform: scale(1.15);
+    }
+
+    /* ================= MOBILE RESPONSIVE FIX ================= */
+    @media (max-width: 768px) {
+      body {
+        overflow-y: auto !important;
+        height: auto !important;
+        padding: 15px;
+      }
+
+      .card-container {
+        height: auto !important;
+        max-height: none !important;
+        padding: 20px 15px 15px !important;
+        overflow-y: visible !important;
+      }
+
+      .top-content {
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+
+      .message-box {
+        width: 100% !important;
+        text-align: left !important;
+        margin-bottom: 10px;
+      }
+
+      .message-title {
+        font-size: 24px;
+      }
+
+      .message-text {
+        font-size: 13.5px;
+        line-height: 1.5;
+      }
+
+      .signature-area {
+        margin-top: 10px;
+      }
+
+      .tree-area {
+        position: relative !important;
+        right: auto !important;
+        bottom: auto !important;
+        width: 100% !important;
+        height: 260px !important;
+        margin-top: 5px;
+        pointer-events: none;
+      }
+
+      canvas#treeCanvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      /* Mobile positioning for left and right photos beside the tree matching red box */
+      .floating-photo-left {
+        left: 8px !important;
+        bottom: 22px !important;
+        width: 65px !important;
+        height: 82px !important;
+      }
+
+      .floating-photo-right {
+        right: 8px !important;
+        bottom: 22px !important;
+        width: 65px !important;
+        height: 82px !important;
+      }
+
+      .bottom-timer-section {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px;
+        margin-top: 15px;
+        padding-top: 10px;
+      }
+
+      .timer-label {
+        font-size: 12px;
+      }
+
+      .timer-clock {
+        font-size: 15px;
+      }
+
+      .timer-clock span {
+        font-size: 18px;
+      }
+
+      .music-widget {
+        width: 100% !important;
+        justify-content: space-between !important;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Local Audio/Video File Player -->
+  <video id="bgMusic" src="song.mp3" loop playsinline style="display: none;"></video>
+
+  <div class="bg-hearts" id="bgHearts"></div>
+
+  <!-- ================= PART 1: LOCK SCREEN ================= -->
+  <div class="lock-screen" id="lockScreen">
+    <div class="lock-icon" id="lockIcon">🔒</div>
+    <h2>What is your husband's name?</h2>
+    
+    <div class="password-display" id="display"></div>
+    <div class="hint" id="hint">Type the secret name below 💕</div>
+
+    <!-- KEYBOARD WITH PHOTO1.JPG THEME BACKGROUND -->
+    <div class="keyboard">
+      <div class="key-row">
+        <button class="key" onclick="pressKey('Q')">Q</button>
+        <button class="key" onclick="pressKey('W')">W</button>
+        <button class="key" onclick="pressKey('E')">E</button>
+        <button class="key" onclick="pressKey('R')">R</button>
+        <button class="key" onclick="pressKey('T')">T</button>
+        <button class="key" onclick="pressKey('Y')">Y</button>
+        <button class="key" onclick="pressKey('U')">U</button>
+        <button class="key" onclick="pressKey('I')">I</button>
+        <button class="key" onclick="pressKey('O')">O</button>
+        <button class="key" onclick="pressKey('P')">P</button>
+      </div>
+      <div class="key-row">
+        <button class="key" onclick="pressKey('A')">A</button>
+        <button class="key" onclick="pressKey('S')">S</button>
+        <button class="key" onclick="pressKey('D')">D</button>
+        <button class="key" onclick="pressKey('F')">F</button>
+        <button class="key" onclick="pressKey('G')">G</button>
+        <button class="key" onclick="pressKey('H')">H</button>
+        <button class="key" onclick="pressKey('J')">J</button>
+        <button class="key" onclick="pressKey('K')">K</button>
+        <button class="key" onclick="pressKey('L')">L</button>
+      </div>
+      <div class="key-row">
+        <button class="key action" onclick="deleteKey()">⌫</button>
+        <button class="key" onclick="pressKey('Z')">Z</button>
+        <button class="key" onclick="pressKey('X')">X</button>
+        <button class="key" onclick="pressKey('C')">C</button>
+        <button class="key" onclick="pressKey('V')">V</button>
+        <button class="key" onclick="pressKey('B')">B</button>
+        <button class="key" onclick="pressKey('N')">N</button>
+        <button class="key" onclick="pressKey('M')">M</button>
+        <button class="key enter" onclick="checkPassword()">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PART 2: LOVE TREE & TIMER ================= -->
+  <div class="love-scene" id="loveScene">
+    <div class="card-container">
+      <div class="top-content">
+        <div class="message-box">
+          <div class="message-title">For the love of my Asha bebi,</div>
+          <div class="message-text">
+            <span>ASHA TUMI EKA NAH AII RIDU TOMAR SATHE SOB SOMOY ACHE SONA TUMI AMER KOLIZAR TUKRA .</span>
+            <span>TUMI AMER JONNO ONEK SPECIAL EKTA MANUS TAI TOMAR JONNO ATA KARON TUMI AMER WIFE ❤️ .</span>
+            <span>You are my happiness, my peace, and my forever. ❤️
+              NISHE DAKHO SONA AMADER EK SATHE KOTO DIN HOYYE GELO TAI NAH I LOVE ASHA ❤️
+              AITA BANAITE 5 HOURS LAGSEY KUTTU BURI 
+            </span>
+          </div>
+          
+          <!-- Cute Animated Couple Avatar & Signature -->
+          <div class="signature-area">
+            <div class="couple-avatar">
+              👩‍❤️‍👨
+              <span class="heart-pulse">💖</span>
+            </div>
+            <div class="signature">— Your, Ridu 💕</div>
+          </div>
+        </div>
+
+        <div class="tree-area">
+          <canvas id="treeCanvas"></canvas>
+          <!-- Left Floating Photo (photo1.jpg) -->
+          <div class="floating-photo-left">
+            <img src="photo1.jpg" alt="Memory 1">
+          </div>
+          <!-- Right Floating Photo (photo4.jpg replacing the red box) -->
+          <div class="floating-photo-right">
+            <img src="photo4.jpg" alt="Memory 4">
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Timer & Music Player Widget with Synced Lyrics -->
+      <div class="bottom-timer-section">
+        <div class="timer-info">
+          <div class="timer-label">My love for you began on 17 March 2022...</div>
+          <div class="timer-clock" id="foreverTimer">Loading...</div>
+        </div>
+
+        <div class="music-widget">
+          <div class="music-disc">🎵</div>
+          <div class="music-info">
+            <span class="song-name">ASHA I LOVE YOU</span>
+            <div class="lyrics-ticker" id="lyricsTicker">🎵 Playing our love song...</div>
+          </div>
+          <div class="sound-waves">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+          <button class="music-controls" id="playPauseBtn" onclick="togglePlayMusic()" title="Play/Pause">⏸</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bgMusic = document.getElementById("bgMusic");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+
+    function togglePlayMusic() {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        playPauseBtn.innerText = "⏸";
+      } else {
+        bgMusic.pause();
+        playPauseBtn.innerText = "▶";
+      }
+    }
+
+    /* ================= AUDIO TIME-SYNCHRONIZED LYRICS ================= */
+    const timedLyrics = [
+      { time: 0,   text: "🎶 Darling, just hold my hand..." },
+      { time: 5,   text: "💖 Be your girl, you'll be my man" },
+      { time: 11,  text: "✨ And I see my future in your eyes" },
+      { time: 18,  text: "💃 Dancing in the dark with you between my arms" },
+      { time: 26,  text: "🌿 Barefoot on the grass while listening to our song" },
+      { time: 34,  text: "😍 When I saw you in that dress looking so beautiful" },
+      { time: 42,  text: "❤️ ASHA I LOVE YOU FOREVER & ALWAYS" }
+    ];
+
+    const lyricsTicker = document.getElementById("lyricsTicker");
+    let lastDisplayedText = "";
+
+    bgMusic.addEventListener("timeupdate", () => {
+      const currentTime = bgMusic.currentTime;
+      let activeLyric = timedLyrics[0].text;
+
+      for (let i = 0; i < timedLyrics.length; i++) {
+        if (currentTime >= timedLyrics[i].time) {
+          activeLyric = timedLyrics[i].text;
+        }
+      }
+
+      if (activeLyric !== lastDisplayedText) {
+        lyricsTicker.style.opacity = 0;
+        setTimeout(() => {
+          lyricsTicker.innerText = activeLyric;
+          lyricsTicker.style.opacity = 1;
+        }, 150);
+        lastDisplayedText = activeLyric;
+      }
+    });
+
+    /* ================= PART 1 LOGIC ================= */
+    let currentInput = "";
+    const secretName = "RIDU";
+    const display = document.getElementById("display");
+    const hint = document.getElementById("hint");
+    const lockIcon = document.getElementById("lockIcon");
+
+    const bgHearts = document.getElementById("bgHearts");
+    const hearts = ["❤️", "💖", "💕", "💗", "✨"];
+    for (let i = 0; i < 20; i++) {
+      let span = document.createElement("span");
+      span.className = "heart-bg";
+      span.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.animationDuration = (Math.random() * 5 + 5) + "s";
+      span.style.animationDelay = Math.random() * 5 + "s";
+      bgHearts.appendChild(span);
+    }
+
+    function pressKey(letter) {
+      if (currentInput.length < 10) {
+        currentInput += letter;
+        updateDisplay();
+        if (currentInput === secretName) {
+          setTimeout(unlockSuccess, 300);
+        }
+      }
+    }
+
+    function deleteKey() {
+      currentInput = currentInput.slice(0, -1);
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      display.innerText = currentInput;
+    }
+
+    function checkPassword() {
+      if (currentInput === secretName) {
+        unlockSuccess();
+      } else {
+        display.classList.add("shake");
+        hint.innerText = "Oops! Wrong name, try again cutie 😜";
+        hint.style.color = "#ff1e42";
+        setTimeout(() => {
+          display.classList.remove("shake");
+          currentInput = "";
+          updateDisplay();
+        }, 500);
+      }
+    }
+
+    function unlockSuccess() {
+      lockIcon.innerText = "🔓";
+      hint.innerText = "Yay! Correct! ❤️";
+      hint.style.color = "#2b9348";
+      
+      // AUTO PLAY SONG ON UNLOCK
+      bgMusic.play().catch(() => {});
+      playPauseBtn.innerText = "⏸";
+
+      setTimeout(() => {
+        document.getElementById("lockScreen").classList.add("unlocked");
+        document.getElementById("loveScene").classList.add("show");
+        startLoveTreeAnimation();
+      }, 450);
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (/^[a-zA-Z]$/.test(e.key)) {
+        pressKey(e.key.toUpperCase());
+      } else if (e.key === "Backspace") {
+        deleteKey();
+      } else if (e.key === "Enter") {
+        checkPassword();
+      }
+    });
+
+    /* ================= PART 2: LIVE FOREVER TIMER ================= */
+    const startDate = new Date(2022, 2, 17, 0, 0, 0); // 17 March 2022
+
+    function updateForeverTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("foreverTimer").innerHTML = 
+        `<span>${totalDays}</span> days <span>${String(hours).padStart(2, '0')}</span> hours <span>${String(minutes).padStart(2, '0')}</span> minutes <span>${String(seconds).padStart(2, '0')}</span> seconds`;
+    }
+    setInterval(updateForeverTimer, 1000);
+    updateForeverTimer();
+
+    /* ================= PART 2: BLOOMING HEART TREE ANIMATION ================= */
+    function startLoveTreeAnimation() {
+      const canvas = document.getElementById("treeCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = 500;
+      canvas.height = 460;
+
+      const colors = ["#ff1e56", "#ff4b72", "#ff758f", "#ff8fa3", "#ffb3c1", "#ff9e00", "#ff5400", "#e01e37"];
+      let crownHearts = [];
+      let fallingHearts = [];
+      let trunkProgress = 0;
+
+      const centerX = 275;
+      const centerY = 185;
+      const scale = 11.5;
+
+      for (let i = 0; i < 480; i++) {
+        let t = Math.random() * Math.PI * 2;
+        let r = Math.sqrt(Math.random());
+        let hx = 16 * Math.pow(Math.sin(t), 3);
+        let hy = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+        
+        crownHearts.push({
+          x: centerX + hx * scale * r + (Math.random() - 0.5) * 10,
+          y: centerY + hy * scale * r + (Math.random() - 0.5) * 10,
+          targetSize: Math.random() * 8 + 6,
+          currentSize: 0,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          angle: (Math.random() - 0.5) * 0.6,
+          delay: Math.random() * 60
+        });
+      }
+
+      function drawHeart(x, y, size, color, angle, alpha = 1) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-size / 2, -size / 2, -size, size / 3, 0, size);
+        ctx.bezierCurveTo(size, size / 3, size / 2, -size / 2, 0, 0);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawTrunk(progress) {
+        ctx.save();
+        ctx.fillStyle = "#1b8a78";
+        ctx.strokeStyle = "#1b8a78";
+        ctx.lineCap = "round";
+
+        let topY = 460 - (230 * progress);
+        ctx.beginPath();
+        ctx.moveTo(263, 460);
+        ctx.quadraticCurveTo(270, 360, 272, topY);
+        ctx.lineTo(278, topY);
+        ctx.quadraticCurveTo(280, 360, 287, 460);
+        ctx.closePath();
+        ctx.fill();
+
+        if (progress > 0.5) {
+          let bProg = (progress - 0.5) * 2;
+          ctx.lineWidth = 7 * bProg;
+          
+          ctx.beginPath();
+          ctx.moveTo(274, 310);
+          ctx.quadraticCurveTo(240, 270, 274 - 65 * bProg, 230);
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.moveTo(276, 295);
+          ctx.quadraticCurveTo(310, 260, 276 + 65 * bProg, 220);
+          ctx.stroke();
+
+          ctx.lineWidth = 5 * bProg;
+          ctx.beginPath();
+          ctx.moveTo(274, 260);
+          ctx.lineTo(274 - 30 * bProg, 195);
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.moveTo(276, 250);
+          ctx.lineTo(276 + 35 * bProg, 190);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      let frame = 0;
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        frame++;
+
+        if (trunkProgress < 1) {
+          trunkProgress += 0.025;
+          if (trunkProgress > 1) trunkProgress = 1;
+        }
+        drawTrunk(trunkProgress);
+
+        if (trunkProgress > 0.6) {
+          crownHearts.forEach((h) => {
+            if (frame > h.delay + 20 && h.currentSize < h.targetSize) {
+              h.currentSize += 0.35;
+            }
+            if (h.currentSize > 0) {
+              drawHeart(h.x, h.y, h.currentSize, h.color, h.angle);
+            }
+          });
+        }
+
+        if (trunkProgress >= 1 && frame % 18 === 0) {
+          let source = crownHearts[Math.floor(Math.random() * crownHearts.length)];
+          fallingHearts.push({
+            x: source.x,
+            y: source.y,
+            size: Math.random() * 6 + 6,
+            color: source.color,
+            vx: -(Math.random() * 1.4 + 0.5),
+            vy: Math.random() * 1.3 + 0.8,
+            angle: Math.random() * Math.PI,
+            spin: (Math.random() - 0.5) * 0.05,
+            alpha: 1
+          });
+        }
+
+        for (let i = fallingHearts.length - 1; i >= 0; i--) {
+          let fh = fallingHearts[i];
+          fh.x += fh.vx + Math.sin(frame * 0.04 + i) * 0.4;
+          fh.y += fh.vy;
+          fh.angle += fh.spin;
+
+          if (fh.y > 430) {
+            fh.alpha -= 0.03;
+          }
+
+          if (fh.alpha <= 0) {
+            fallingHearts.splice(i, 1);
+          } else {
+            drawHeart(fh.x, fh.y, fh.size, fh.color, fh.angle, fh.alpha);
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+  </script>
+</body>
+</html>
